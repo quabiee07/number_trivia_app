@@ -2,22 +2,25 @@
 // in number_trivia/test/helper/mock_helper.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i5;
+import 'dart:async' as _i6;
 
 import 'package:dartz/dartz.dart' as _i2;
+import 'package:internet_connection_checker/internet_connection_checker.dart'
+    as _i4;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:number_trivia/core/error/failure.dart' as _i6;
-import 'package:number_trivia/core/platform/network_info.dart' as _i10;
+import 'package:number_trivia/core/error/failure.dart' as _i7;
+import 'package:number_trivia/core/network/network_info.dart' as _i11;
 import 'package:number_trivia/feature/number_trivia/data/data_src/number_trivia_local_data_source.dart'
-    as _i9;
+    as _i10;
 import 'package:number_trivia/feature/number_trivia/data/data_src/number_trivia_remote_data_source.dart'
-    as _i8;
+    as _i9;
 import 'package:number_trivia/feature/number_trivia/data/models/number_trivia_model.dart'
     as _i3;
 import 'package:number_trivia/feature/number_trivia/domain/entities/number_trivia.dart'
-    as _i7;
+    as _i8;
 import 'package:number_trivia/feature/number_trivia/domain/repositories/number_trivia_repo.dart'
-    as _i4;
+    as _i5;
+import 'package:shared_preferences/shared_preferences.dart' as _i12;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -34,88 +37,223 @@ class _FakeEither_0<L, R> extends _i1.Fake implements _i2.Either<L, R> {}
 class _FakeNumberTriviaModel_1 extends _i1.Fake
     implements _i3.NumberTriviaModel {}
 
+class _FakeDuration_2 extends _i1.Fake implements Duration {}
+
+class _FakeAddressCheckResult_3 extends _i1.Fake
+    implements _i4.AddressCheckResult {}
+
 /// A class which mocks [NumberTriviaRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockNumberTriviaRepository extends _i1.Mock
-    implements _i4.NumberTriviaRepository {
+    implements _i5.NumberTriviaRepository {
   MockNumberTriviaRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<_i2.Either<_i6.Failure, _i7.NumberTrivia>> getStaticNumberTrivia(
+  _i6.Future<_i2.Either<_i7.Failure, _i8.NumberTrivia>> getStaticNumberTrivia(
           int? number) =>
       (super.noSuchMethod(Invocation.method(#getStaticNumberTrivia, [number]),
-          returnValue: Future<_i2.Either<_i6.Failure, _i7.NumberTrivia>>.value(
-              _FakeEither_0<_i6.Failure, _i7.NumberTrivia>())) as _i5
-          .Future<_i2.Either<_i6.Failure, _i7.NumberTrivia>>);
+          returnValue: Future<_i2.Either<_i7.Failure, _i8.NumberTrivia>>.value(
+              _FakeEither_0<_i7.Failure, _i8.NumberTrivia>())) as _i6
+          .Future<_i2.Either<_i7.Failure, _i8.NumberTrivia>>);
   @override
-  _i5.Future<_i2.Either<_i6.Failure, _i7.NumberTrivia>>
+  _i6.Future<_i2.Either<_i7.Failure, _i8.NumberTrivia>>
       getRandomNumberTrivia() =>
           (super.noSuchMethod(Invocation.method(#getRandomNumberTrivia, []),
                   returnValue:
-                      Future<_i2.Either<_i6.Failure, _i7.NumberTrivia>>.value(
-                          _FakeEither_0<_i6.Failure, _i7.NumberTrivia>()))
-              as _i5.Future<_i2.Either<_i6.Failure, _i7.NumberTrivia>>);
+                      Future<_i2.Either<_i7.Failure, _i8.NumberTrivia>>.value(
+                          _FakeEither_0<_i7.Failure, _i8.NumberTrivia>()))
+              as _i6.Future<_i2.Either<_i7.Failure, _i8.NumberTrivia>>);
 }
 
 /// A class which mocks [NumberTriviaRemoteDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockNumberTriviaRemoteDataSource extends _i1.Mock
-    implements _i8.NumberTriviaRemoteDataSource {
+    implements _i9.NumberTriviaRemoteDataSource {
   MockNumberTriviaRemoteDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<_i3.NumberTriviaModel> getStaticNumberTrivia(int? number) =>
+  _i6.Future<_i3.NumberTriviaModel> getStaticNumberTrivia(int? number) =>
       (super.noSuchMethod(Invocation.method(#getStaticNumberTrivia, [number]),
               returnValue: Future<_i3.NumberTriviaModel>.value(
                   _FakeNumberTriviaModel_1()))
-          as _i5.Future<_i3.NumberTriviaModel>);
+          as _i6.Future<_i3.NumberTriviaModel>);
   @override
-  _i5.Future<_i3.NumberTriviaModel> getRandomNumberTrivia() =>
+  _i6.Future<_i3.NumberTriviaModel> getRandomNumberTrivia() =>
       (super.noSuchMethod(Invocation.method(#getRandomNumberTrivia, []),
               returnValue: Future<_i3.NumberTriviaModel>.value(
                   _FakeNumberTriviaModel_1()))
-          as _i5.Future<_i3.NumberTriviaModel>);
+          as _i6.Future<_i3.NumberTriviaModel>);
 }
 
 /// A class which mocks [NumberTriviaLocalDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockNumberTriviaLocalDataSource extends _i1.Mock
-    implements _i9.NumberTriviaLocalDataSource {
+    implements _i10.NumberTriviaLocalDataSource {
   MockNumberTriviaLocalDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<_i3.NumberTriviaModel> getLastNumberTrivia() =>
+  _i6.Future<_i3.NumberTriviaModel> getLastNumberTrivia() =>
       (super.noSuchMethod(Invocation.method(#getLastNumberTrivia, []),
               returnValue: Future<_i3.NumberTriviaModel>.value(
                   _FakeNumberTriviaModel_1()))
-          as _i5.Future<_i3.NumberTriviaModel>);
+          as _i6.Future<_i3.NumberTriviaModel>);
   @override
-  _i5.Future<void> cacheNumberTrivia(_i3.NumberTriviaModel? triviaToCache) =>
+  _i6.Future<void> cacheNumberTrivia(_i3.NumberTriviaModel? triviaToCache) =>
       (super.noSuchMethod(
           Invocation.method(#cacheNumberTrivia, [triviaToCache]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
 }
 
 /// A class which mocks [NetworkInfo].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNetworkInfo extends _i1.Mock implements _i10.NetworkInfo {
+class MockNetworkInfo extends _i1.Mock implements _i11.NetworkInfo {
   MockNetworkInfo() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<bool> get isConnected =>
+  _i6.Future<bool> get isConnected =>
       (super.noSuchMethod(Invocation.getter(#isConnected),
-          returnValue: Future<bool>.value(false)) as _i5.Future<bool>);
+          returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
+}
+
+/// A class which mocks [InternetConnectionChecker].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockInternetConnectionChecker extends _i1.Mock
+    implements _i4.InternetConnectionChecker {
+  MockInternetConnectionChecker() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  Duration get checkInterval =>
+      (super.noSuchMethod(Invocation.getter(#checkInterval),
+          returnValue: _FakeDuration_2()) as Duration);
+  @override
+  Duration get checkTimeout =>
+      (super.noSuchMethod(Invocation.getter(#checkTimeout),
+          returnValue: _FakeDuration_2()) as Duration);
+  @override
+  List<_i4.AddressCheckOptions> get addresses =>
+      (super.noSuchMethod(Invocation.getter(#addresses),
+              returnValue: <_i4.AddressCheckOptions>[])
+          as List<_i4.AddressCheckOptions>);
+  @override
+  set addresses(List<_i4.AddressCheckOptions>? value) =>
+      super.noSuchMethod(Invocation.setter(#addresses, value),
+          returnValueForMissingStub: null);
+  @override
+  _i6.Future<bool> get hasConnection =>
+      (super.noSuchMethod(Invocation.getter(#hasConnection),
+          returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
+  @override
+  _i6.Future<_i4.InternetConnectionStatus> get connectionStatus =>
+      (super.noSuchMethod(Invocation.getter(#connectionStatus),
+              returnValue: Future<_i4.InternetConnectionStatus>.value(
+                  _i4.InternetConnectionStatus.connected))
+          as _i6.Future<_i4.InternetConnectionStatus>);
+  @override
+  _i6.Stream<_i4.InternetConnectionStatus> get onStatusChange =>
+      (super.noSuchMethod(Invocation.getter(#onStatusChange),
+              returnValue: Stream<_i4.InternetConnectionStatus>.empty())
+          as _i6.Stream<_i4.InternetConnectionStatus>);
+  @override
+  bool get hasListeners =>
+      (super.noSuchMethod(Invocation.getter(#hasListeners), returnValue: false)
+          as bool);
+  @override
+  bool get isActivelyChecking =>
+      (super.noSuchMethod(Invocation.getter(#isActivelyChecking),
+          returnValue: false) as bool);
+  @override
+  _i6.Future<_i4.AddressCheckResult> isHostReachable(
+          _i4.AddressCheckOptions? options) =>
+      (super.noSuchMethod(Invocation.method(#isHostReachable, [options]),
+              returnValue: Future<_i4.AddressCheckResult>.value(
+                  _FakeAddressCheckResult_3()))
+          as _i6.Future<_i4.AddressCheckResult>);
+}
+
+/// A class which mocks [SharedPreferences].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSharedPreferences extends _i1.Mock implements _i12.SharedPreferences {
+  MockSharedPreferences() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  Set<String> getKeys() => (super.noSuchMethod(Invocation.method(#getKeys, []),
+      returnValue: <String>{}) as Set<String>);
+  @override
+  Object? get(String? key) =>
+      (super.noSuchMethod(Invocation.method(#get, [key])) as Object?);
+  @override
+  bool? getBool(String? key) =>
+      (super.noSuchMethod(Invocation.method(#getBool, [key])) as bool?);
+  @override
+  int? getInt(String? key) =>
+      (super.noSuchMethod(Invocation.method(#getInt, [key])) as int?);
+  @override
+  double? getDouble(String? key) =>
+      (super.noSuchMethod(Invocation.method(#getDouble, [key])) as double?);
+  @override
+  String? getString(String? key) =>
+      (super.noSuchMethod(Invocation.method(#getString, [key])) as String?);
+  @override
+  bool containsKey(String? key) =>
+      (super.noSuchMethod(Invocation.method(#containsKey, [key]),
+          returnValue: false) as bool);
+  @override
+  List<String>? getStringList(String? key) =>
+      (super.noSuchMethod(Invocation.method(#getStringList, [key]))
+          as List<String>?);
+  @override
+  _i6.Future<bool> setBool(String? key, bool? value) =>
+      (super.noSuchMethod(Invocation.method(#setBool, [key, value]),
+          returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
+  @override
+  _i6.Future<bool> setInt(String? key, int? value) =>
+      (super.noSuchMethod(Invocation.method(#setInt, [key, value]),
+          returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
+  @override
+  _i6.Future<bool> setDouble(String? key, double? value) =>
+      (super.noSuchMethod(Invocation.method(#setDouble, [key, value]),
+          returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
+  @override
+  _i6.Future<bool> setString(String? key, String? value) =>
+      (super.noSuchMethod(Invocation.method(#setString, [key, value]),
+          returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
+  @override
+  _i6.Future<bool> setStringList(String? key, List<String>? value) =>
+      (super.noSuchMethod(Invocation.method(#setStringList, [key, value]),
+          returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
+  @override
+  _i6.Future<bool> remove(String? key) =>
+      (super.noSuchMethod(Invocation.method(#remove, [key]),
+          returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
+  @override
+  _i6.Future<bool> commit() =>
+      (super.noSuchMethod(Invocation.method(#commit, []),
+          returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
+  @override
+  _i6.Future<bool> clear() => (super.noSuchMethod(Invocation.method(#clear, []),
+      returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
+  @override
+  _i6.Future<void> reload() =>
+      (super.noSuchMethod(Invocation.method(#reload, []),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
 }

@@ -1,5 +1,4 @@
 import 'package:number_trivia/core/error/exception.dart';
-import 'package:number_trivia/core/platform/network_info.dart';
 import 'package:number_trivia/feature/number_trivia/data/data_src/number_trivia_local_data_source.dart';
 import 'package:number_trivia/feature/number_trivia/data/data_src/number_trivia_remote_data_source.dart';
 import 'package:number_trivia/feature/number_trivia/data/models/number_trivia_model.dart';
@@ -7,6 +6,8 @@ import 'package:number_trivia/feature/number_trivia/domain/entities/number_trivi
 import 'package:number_trivia/core/error/failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:number_trivia/feature/number_trivia/domain/repositories/number_trivia_repo.dart';
+
+import '../../../../core/network/network_info.dart';
 
 typedef _StaticOrRandomChooser =  Future<NumberTriviaModel> Function();
 
