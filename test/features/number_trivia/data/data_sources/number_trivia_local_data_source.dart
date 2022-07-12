@@ -46,8 +46,7 @@ void main() {
   });
 
   group('cacheNumberTrivia', () {
-    final tNumberTriviaModel =
-        NumberTriviaModel(number: 1, text: 'test trivia');
+    final tNumberTriviaModel = NumberTriviaModel(number: 1, text: 'test trivia');
     test('should call SharedPreferences to cache the data', () async {
       when(sharedPreferences.setString(any, any))
           .thenAnswer((realInvocation) async => true);
