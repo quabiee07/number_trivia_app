@@ -16,25 +16,26 @@ abstract class NumberTriviaRemoteDataSource {
   Future<NumberTriviaModel> getRandomNumberTrivia();
 }
 
-Uri url(String extension) =>
-    Uri(scheme: 'http', host: 'numbersapi.com', query: extension);
+
 
 class NumberTriviaRemoteDataSourceImpl implements NumberTriviaRemoteDataSource {
   final http.Client client;
   NumberTriviaRemoteDataSourceImpl({required this.client});
   @override
   Future<NumberTriviaModel> getStaticNumberTrivia(int number) {
-    return _getTriviaFromUrl(url('$number'));
+    return _getTriviaFromUrl('http://numbersapi.com/$number');
   }
 
   @override
   Future<NumberTriviaModel> getRandomNumberTrivia() {
-    return _getTriviaFromUrl(url('random'));
+    return _getTriviaFromUrl('http://numbersapi.com/random');
   }
 
-  Future<NumberTriviaModel> _getTriviaFromUrl(Uri url) async {
+  Future<NumberTriviaModel> _getTriviaFromUrl(String url) async {
     final response =
-        await client.get(url, headers: {'Content-Type': 'application/json', 'Charset': 'utf-8'});
+        await client.get(
+          Uri.parse(url), 
+          headers: {'Content-Type': 'application/json'});
     if (response.statusCode == 200) {
       print(response.body);
       return NumberTriviaModel.fromJson(json.decode(response.body));

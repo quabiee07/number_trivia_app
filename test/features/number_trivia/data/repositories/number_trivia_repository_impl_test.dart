@@ -34,17 +34,17 @@ void main() {
     group('device is online', () {
       setUp(() {
         when(mockNetworkInfo.isConnected)
-            .thenAnswer((realInvocation) async => true);
+            .thenAnswer((_) async => true);
       });
       body();
     });
   }
 
   void runTestOffline(Function body) {
-    group('device is online', () {
+    group('device is offline', () {
       setUp(() {
         when(mockNetworkInfo.isConnected)
-            .thenAnswer((realInvocation) async => false);
+            .thenAnswer((_) async => false);
       });
       body();
     });

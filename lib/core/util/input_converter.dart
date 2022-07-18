@@ -2,11 +2,10 @@ import 'package:dartz/dartz.dart';
 import 'package:number_trivia/core/error/failure.dart';
 
 class InputConverter {
-  Either<Failure, int> stringToUnsignedString(String str) {
+  Either<Failure, int> stringToUnsignedInteger(String str) {
     try {
       final integer = int.tryParse(str) ?? 0;
-      if(integer < 0 ) throw FormatException();
-      return Right(integer);
+      return integer < 0 ? Left(InvalidInputFailure()) : Right(integer);
     } on FormatException {
       return Left(InvalidInputFailure());
     }

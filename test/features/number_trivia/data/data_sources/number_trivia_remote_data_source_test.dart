@@ -41,7 +41,7 @@ void main() {
       // assert
 
       verify(mockHttpClient
-          .get(url('$tNumber'), headers: {'Content-Type': 'application/json'}));
+          .get(Uri.parse('http://numbersapi.com/$tNumber'), headers: {'Content-Type': 'application/json'}));
     });
 
     test('should return number trivia when the status code is 200 (Success)',
@@ -77,7 +77,7 @@ void main() {
       dataSource.getRandomNumberTrivia();
 
       verify(mockHttpClient
-          .get(url('random'), headers: {"Content-Type": "application/json"}));
+          .get(Uri.parse('http://numbersapi.com/random'), headers: {"Content-Type": "application/json"}));
     });
     test('should return numberTrivia when response code is 200(success)', () async{
       setUpMockHttpClientSuccess200();

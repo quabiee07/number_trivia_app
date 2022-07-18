@@ -10,13 +10,10 @@ void main(){
   final tNumberTriviaModel = NumberTriviaModel(number: 1, text: 'Test');
 
 
-  test('should be a subclss of NumberTrivia entity', ()async {
+  test('should be a subclss of NumberTrivia entity', () {
     //assert
     expect(tNumberTriviaModel, isA<NumberTriviaModel>());
-    //act
-
-    //assert
-
+  
   });
 
   group('fromJson', () {

@@ -9,40 +9,32 @@ void main(){
     inputConverter = InputConverter();
   });
 
-  group('stringToUnsignedInt', () {
-    test('should return an integer when the string represents an unsigned integer',
-     () async {
+  group('String to unsigned in', () {
+    test('Should return an integer when the string represents an unsigned integer', (){
+      // arrange
       const str = '123';
-
-      final result = inputConverter.stringToUnsignedString(str);
-
+      // act
+      final result = inputConverter.stringToUnsignedInteger(str);
+      // assert
       expect(result, const Right(123));
-
-      
     });
 
-    test(
-      "should return a failure when a string is not an integer",
-      () async{
-        const str ='abc';
+    // test('Should return a failure when the string is not an integer', (){
+    //   // arrange
+    //   const str = '1.0';
+    //   // act
+    //   final result = inputConverter.stringToUnsignedInteger(str);
+    //   // assert
+    //   expect(result,  Left(InvalidInputFailure()));
+    // });
 
-        final result = inputConverter.stringToUnsignedString(str);
-
-        expect(result, Left(InvalidInputFailure()));
-      },
-    );
-
-    test(
-      "should return a failure when the string is a negative an integer",
-      () async{
-        const str ='-123';
-
-        final result = inputConverter.stringToUnsignedString(str);
-
-        expect(result, Left(InvalidInputFailure()));
-      },
-    );
-
-
-  });
+    test('Should return a failure when the string is a negative integer', (){
+      // arrange
+      const str = '-123';
+      // act
+      final result = inputConverter.stringToUnsignedInteger(str);
+      // assert
+      expect(result,  Left(InvalidInputFailure()));
+    });
+   });
 }
